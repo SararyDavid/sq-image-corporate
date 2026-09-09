@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@theme {
+--color-navy-primary: #0A0A0A; /* Deep Carbon Black */
+  --color-electric-accent: #FF6B00; /* SQ Brand Orange */
+}
