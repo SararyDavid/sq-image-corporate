@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const App = () => {
   const [activeEra, setActiveEra] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
   const [status, setStatus] = useState('');
 
@@ -102,6 +103,8 @@ const App = () => {
               <span className="text-[10px] tracking-widest text-slate-400 uppercase font-medium mt-1">Pte Ltd • Est. 1997</span>
             </div>
           </div>
+
+          {/* Desktop Links */}
           <div className="hidden lg:flex space-x-6 text-xs font-bold uppercase tracking-widest text-slate-400">
             <a href="#about" className="hover:text-blue-400 transition-colors">Legacy</a>
             <a href="#governance" className="hover:text-blue-400 transition-colors">Mission</a>
@@ -110,10 +113,42 @@ const App = () => {
             <a href="#projects" className="hover:text-blue-400 transition-colors">Portfolio</a>
             <a href="#contact" className="hover:text-blue-400 transition-colors">Contact</a>
           </div>
+
+          {/* Mobile Menu Toggle Button */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 text-slate-400 hover:text-white focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="lg:hidden pt-4 pb-3 border-t border-slate-800 mt-3 flex flex-col space-y-3 text-xs font-bold uppercase tracking-widest text-slate-300"
+          >
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-400 transition-colors py-1">Legacy</a>
+            <a href="#governance" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-400 transition-colors py-1">Mission</a>
+            <a href="#solutions" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-400 transition-colors py-1">Solutions</a>
+            <a href="#expertise" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-400 transition-colors py-1">Stack</a>
+            <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-400 transition-colors py-1">Portfolio</a>
+            <a href="#contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-blue-400 transition-colors py-1 text-blue-400">Contact</a>
+          </motion.div>
+        )}
       </nav>
 
-      {/* Hero Section with Restored Background Photo */}
+      {/* Hero Section */}
       <header className="relative py-28 md:py-36 px-6 flex items-center justify-center min-h-[85vh] border-b border-slate-800/80 overflow-hidden bg-[#06090f]">
         <div className="absolute inset-0 opacity-15 mix-blend-luminosity pointer-events-none scale-105">
           <img 
@@ -239,7 +274,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Enterprise Solutions Section with Telemetry Background Image */}
+      {/* Enterprise Solutions Section */}
       <section id="solutions" className="py-28 px-6 relative bg-[#04060a] border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-14 text-center md:text-left">
@@ -248,8 +283,6 @@ const App = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 md:auto-rows-[280px] gap-6">
-            
-            {/* Main Feature Card with Telemetry Background Image */}
             <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-[#0b0f17] to-blue-950/20 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col justify-end shadow-2xl group">
               <div className="absolute inset-0 opacity-25 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none">
                 <img 
