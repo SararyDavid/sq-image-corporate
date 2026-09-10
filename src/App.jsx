@@ -161,9 +161,9 @@ const App = () => {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
 
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="relative max-w-4xl mx-auto text-center z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold tracking-wider text-blue-400 mb-6 uppercase font-mono shadow-[0_0_15px_rgba(59,130,246,0.1)]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold tracking-wider text-blue-400 mb-6 uppercase">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-            SYS_INTEGRATOR // SIN_1997
+            Technology Integration Partner • Singapore & Southeast Asia
           </div>
           <h1 className="text-4xl md:text-7xl font-extrabold mb-6 tracking-tight leading-[1.05] text-white">
             Driving the Future of <br/>
