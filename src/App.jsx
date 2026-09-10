@@ -1,9 +1,39 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const App = () => {
+  const [activeEra, setActiveEra] = useState(0);
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' });
   const [status, setStatus] = useState('');
+
+  const timelineEras = [
+    {
+      year: "1997",
+      title: "Automotive Electronics & Audio",
+      tag: "Foundation",
+      desc: "Originated as a high-precision specialist in car audio and specialized automotive electronic components, establishing a benchmark for technical reliability."
+    },
+    {
+      year: "2000s",
+      title: "Authorized Dealer Supply Chain",
+      tag: "Expansion",
+      desc: "Scaled into nationwide distribution of elite automotive accessories, supplying major authorized dealer networks and expanding regional logistics."
+    },
+    {
+      year: "2010s",
+      title: "OEM Wiring Harness Execution",
+      tag: "Engineering",
+      desc: "Successfully engineered and fulfilled complex OEM wiring harness projects, adapting ahead of strict vehicle manufacturer factory standards."
+    },
+    {
+      year: "Present",
+      title: "GPS Fleet & AI Telematics",
+      tag: "Transformation",
+      desc: "Pivoted into full-scale enterprise GPS fleet management, intelligent AI video telematics systems, and cloud infrastructure powering modern transport networks."
+    }
+  ];
+
+  const industries = ['Logistics', 'Transportation', 'Construction', 'Government', 'Healthcare', 'Marine', 'Utilities', 'Security', 'Commercial Fleets', 'Smart Mobility'];
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -43,8 +73,8 @@ const App = () => {
   };
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 25 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
   };
 
   return (
@@ -74,10 +104,9 @@ const App = () => {
           </div>
           <div className="hidden lg:flex space-x-6 text-xs font-bold uppercase tracking-widest text-slate-400">
             <a href="#about" className="hover:text-blue-400 transition-colors">Legacy</a>
-            <a href="#governance" className="hover:text-blue-400 transition-colors">Mission & Values</a>
+            <a href="#governance" className="hover:text-blue-400 transition-colors">Mission</a>
             <a href="#solutions" className="hover:text-blue-400 transition-colors">Solutions</a>
-            <a href="#industries" className="hover:text-blue-400 transition-colors">Industries</a>
-            <a href="#expertise" className="hover:text-blue-400 transition-colors">Tech Stack</a>
+            <a href="#expertise" className="hover:text-blue-400 transition-colors">Stack</a>
             <a href="#projects" className="hover:text-blue-400 transition-colors">Portfolio</a>
             <a href="#contact" className="hover:text-blue-400 transition-colors">Contact</a>
           </div>
@@ -85,230 +114,317 @@ const App = () => {
       </nav>
 
       {/* Hero Section */}
-      <header className="relative py-28 md:py-36 px-6 flex items-center justify-center min-h-[85vh] border-b border-slate-800/80 overflow-hidden">
-        <div className="absolute inset-0 opacity-15 mix-blend-luminosity pointer-events-none scale-105">
-          <img 
-            src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=2070&auto=format&fit=crop" 
-            alt="Logistics & Fleet" 
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06090f] via-[#06090f]/90 to-transparent"></div>
+      <header className="relative py-28 md:py-36 px-6 flex items-center justify-center min-h-[85vh] border-b border-slate-800/80 overflow-hidden bg-[#06090f]">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
 
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="relative max-w-4xl mx-auto text-center z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold tracking-wider text-blue-400 mb-6 uppercase">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold tracking-wider text-blue-400 mb-6 uppercase font-mono shadow-[0_0_15px_rgba(59,130,246,0.1)]">
             <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-            Technology Integration Partner • Singapore & Southeast Asia
+            SYS_INTEGRATOR // SIN_1997
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-[1.12] text-white">
+          <h1 className="text-4xl md:text-7xl font-extrabold mb-6 tracking-tight leading-[1.05] text-white">
             Driving the Future of <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-slate-200 to-[#FF3366]">Connected Mobility Since 1997</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-slate-100 to-[#FF3366]">Connected Mobility</span>
           </h1>
           <p className="text-base md:text-lg text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Established since 1997, SQ Image (S) Pte Ltd delivers intelligent fleet technologies, AI video telematics, IoT connectivity and integrated mobility solutions that improve safety, operational efficiency and business performance.
+            Established in 1997, SQ Image (S) Pte Ltd delivers intelligent fleet technologies, AI video telematics, IoT connectivity and integrated mobility solutions across Singapore and Southeast Asia.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <a href="#solutions" className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 px-8 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-sm tracking-wide uppercase shadow-lg shadow-blue-600/20">
-              Explore Our Solutions
+            <a href="#solutions" className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-sm tracking-wide uppercase shadow-lg shadow-blue-600/20">
+              Explore Architecture
             </a>
-            <a href="#contact" className="bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-slate-500 text-white font-bold py-3.5 px-8 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-sm tracking-wide uppercase">
-              Contact Our Team
+            <a href="#contact" className="bg-[#0b0f17] hover:bg-slate-800 border border-slate-700 hover:border-slate-500 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] text-sm tracking-wide uppercase shadow-lg">
+              Contact Integration Team
             </a>
           </div>
         </motion.div>
       </header>
 
-      {/* About & Evolution (Why SQ Image) */}
-      <section id="about" className="py-24 px-6 relative bg-[#04060a] border-b border-slate-800/80">
+      {/* Interactive 30-Year History Timeline Section */}
+      <section id="about" className="py-28 px-6 relative bg-[#04060a] border-b border-slate-800/85">
         <div className="max-w-5xl mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="border-l-2 border-[#FF3366] pl-6 mb-12">
-            <h2 className="text-xs font-bold text-[#FF3366] uppercase tracking-widest mb-1">Our Journey</h2>
-            <h3 className="text-3xl font-extrabold text-white">Three Decades of Industry Leadership</h3>
-            <p className="text-slate-400 text-sm mt-2">From automotive electronics to intelligent fleet technologies, SQ Image has continuously evolved to meet the changing needs of the transportation industry.</p>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-14">
+            <span className="text-xs font-mono text-[#FF3366] uppercase tracking-widest block mb-2">Chronological Evolution</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Three Decades of Leadership</h2>
+            <p className="text-slate-400 text-sm mt-4 max-w-xl">Select an era below to inspect our organizational growth from automotive specialists to enterprise telemetry leaders.</p>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-            <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 p-6 rounded-2xl flex flex-col justify-between shadow-sm">
-              <div>
-                <span className="text-blue-400 font-mono text-xs uppercase">1997 Foundation</span>
-                <h4 className="text-lg font-bold text-white mt-1 mb-2">Automotive Electronics & Audio</h4>
-                <p className="text-slate-400 text-xs leading-relaxed">Started as a specialist in car audio and vehicle electronics before scaling into official accessories distribution for Sony authorized dealer networks.</p>
-              </div>
-            </motion.div>
-            <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 p-6 rounded-2xl flex flex-col justify-between shadow-sm">
-              <div>
-                <span className="text-blue-400 font-mono text-xs uppercase">OEM Evolution</span>
-                <h4 className="text-lg font-bold text-white mt-1 mb-2">Wiring Harness Execution</h4>
-                <p className="text-slate-400 text-xs leading-relaxed">Successfully secured and delivered OEM wiring harness projects, adapting seamlessly when vehicle manufacturers integrated standard factory accessories.</p>
-              </div>
-            </motion.div>
-            <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-blue-500/50 p-6 rounded-2xl flex flex-col justify-between border-l-2 border-l-blue-500 shadow-sm">
-              <div>
-                <span className="text-blue-400 font-mono text-xs uppercase">Modern Era</span>
-                <h4 className="text-lg font-bold text-white mt-1 mb-2">GPS & AI Telematics</h4>
-                <p className="text-slate-400 text-xs leading-relaxed">Pivoted into full-scale enterprise GPS fleet management and advanced AI video telematics systems powering regional transport networks.</p>
-              </div>
-            </motion.div>
-          </div>
-          
-          <div className="mt-8 p-6 bg-[#0b0f17] border border-slate-800 rounded-2xl text-center">
-            <p className="text-sm font-semibold text-slate-300">Technology changes. <span className="text-blue-400">Our commitment to innovation never does.</span></p>
-          </div>
-        </div>
-      </section>
 
-      {/* Vision, Mission & Core Values */}
-      <section id="governance" className="py-24 px-6 border-b border-slate-800/80">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-8">
-            <motion.div whileHover={{ scale: 1.01 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 p-8 rounded-3xl shadow-sm">
-              <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">Our Vision</h2>
-              <p className="text-slate-300 text-sm md:text-base leading-relaxed">To become Southeast Asia’s trusted technology integration partner for intelligent mobility, connected vehicles and fleet digitalisation.</p>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.01 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 p-8 rounded-3xl shadow-sm">
-              <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-2">Our Mission</h2>
-              <p className="text-slate-300 text-sm md:text-base leading-relaxed">To deliver innovative, reliable and scalable technology solutions that improve safety, operational efficiency and business productivity while building long-term partnerships with our customers.</p>
-            </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 relative z-10">
+            {timelineEras.map((era, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveEra(index)}
+                className={`p-5 rounded-2xl border text-left transition-all duration-300 ${
+                  activeEra === index 
+                    ? 'bg-blue-600/10 border-blue-500 text-white shadow-[0_0_20px_rgba(37,99,235,0.15)] scale-[1.02]' 
+                    : 'bg-[#0b0f17] border-slate-800 text-slate-400 hover:border-slate-600 hover:bg-slate-800/50'
+                }`}
+              >
+                <span className={`text-xs font-mono block mb-1 ${activeEra === index ? 'text-blue-400' : 'text-slate-500'}`}>{era.tag}</span>
+                <span className="text-lg md:text-xl font-bold tracking-tight">{era.year}</span>
+              </button>
+            ))}
           </div>
-          <div className="bg-[#0b0f17] border border-slate-800 p-8 rounded-3xl flex flex-col justify-center shadow-sm">
-            <h2 className="text-xs font-bold text-[#FF3366] uppercase tracking-widest mb-4">Core Values</h2>
-            <div className="grid grid-cols-2 gap-4 text-sm font-semibold text-slate-200">
-              {['Innovation', 'Integrity', 'Reliability', 'Customer Partnership', 'Continuous Improvement', 'Professional Excellence'].map((val, i) => (
-                <motion.div key={i} whileHover={{ x: 4 }} transition={{ duration: 0.2 }} className="p-3 bg-[#06090f] border border-slate-800 hover:border-blue-500/40 rounded-xl flex items-center gap-3 cursor-default">
-                  <span className="h-2 w-2 rounded-full bg-blue-500"></span> {val}
-                </motion.div>
-              ))}
+
+          <div className="bg-[#0b0f17] border border-slate-800 rounded-3xl p-8 md:p-14 relative overflow-hidden shadow-2xl">
+            <div className="absolute -top-10 -right-10 p-8 opacity-5 font-mono text-[150px] font-black text-slate-400 pointer-events-none tracking-tighter">
+              {timelineEras[activeEra].year}
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeEra}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 max-w-2xl"
+              >
+                <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 bg-slate-900 border border-slate-700 text-slate-300 rounded-md inline-block mb-6 shadow-inner">
+                  Archive Node {activeEra + 1}.0
+                </span>
+                <h3 className="text-2xl md:text-4xl font-extrabold text-white mb-4 leading-tight">{timelineEras[activeEra].title}</h3>
+                <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8 text-pretty">{timelineEras[activeEra].desc}</p>
+              </motion.div>
+            </AnimatePresence>
+            <div className="pt-6 border-t border-slate-800/80 flex items-center justify-between text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+              <span>SQ IMAGE ARCHIVE // 1997-2026</span>
+              <span className="text-blue-400 flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span> STATUS: OPERATIONAL</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Core Solutions Bento Grid */}
+      {/* Vision, Mission & Core Values */}
+      <section id="governance" className="py-24 px-6 border-b border-slate-800/80 bg-[#06090f]">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5 space-y-12">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <h2 className="text-xs font-mono text-blue-400 uppercase tracking-widest mb-4 flex items-center gap-3"><div className="h-[1px] w-8 bg-blue-400"></div>Corporate Vision</h2>
+              <p className="text-white text-xl md:text-2xl font-light leading-relaxed">
+                "To become Southeast Asia’s trusted technology integration partner for <span className="font-semibold text-blue-400">intelligent mobility</span>, connected vehicles and fleet digitalisation."
+              </p>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+              <h2 className="text-xs font-mono text-[#FF3366] uppercase tracking-widest mb-4 flex items-center gap-3"><div className="h-[1px] w-8 bg-[#FF3366]"></div>Corporate Mission</h2>
+              <p className="text-slate-300 text-base leading-relaxed">
+                To deliver innovative, reliable and scalable technology solutions that improve safety, operational efficiency and business productivity while building long-term partnerships with our customers.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="lg:col-span-7">
+            <div className="bg-[#0b0f17] border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-[#FF3366]"></div>
+              <h2 className="text-sm font-bold text-white uppercase tracking-widest mb-8">Operating Core Values</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-sm font-medium text-slate-300">
+                {['Innovation', 'Integrity', 'Reliability', 'Customer Partnership', 'Continuous Improvement', 'Professional Excellence'].map((val, i) => (
+                  <div key={i} className="flex items-center gap-4 group">
+                    <div className="h-8 w-8 rounded-lg bg-slate-900 border border-slate-700 flex items-center justify-center text-blue-400 font-mono text-xs group-hover:border-blue-500 group-hover:text-white transition-colors">
+                      0{i + 1}
+                    </div>
+                    <span className="group-hover:text-white transition-colors">{val}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Enterprise Solutions Section with Restored Background Image */}
       <section id="solutions" className="py-28 px-6 relative bg-[#04060a] border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-14">
-            <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">Architecture & Capabilities</h2>
-            <h3 className="text-3xl md:text-4xl font-extrabold text-white">Enterprise Customer Solutions</h3>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-14 text-center md:text-left">
+            <span className="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-2">Architecture & Capabilities</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Enterprise Customer Solutions</h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 md:auto-rows-[250px] gap-6">
-            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="md:col-span-2 md:row-span-2 bg-[#0b0f17] border border-slate-800 hover:border-blue-500/50 rounded-3xl p-8 relative overflow-hidden flex flex-col justify-end group shadow-sm">
-              <div className="absolute inset-0 opacity-20 group-hover:opacity-35 transition-opacity duration-500 pointer-events-none">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" alt="Telemetry" className="w-full h-full object-cover" />
+          <div className="grid grid-cols-1 md:grid-cols-3 md:auto-rows-[280px] gap-6">
+            
+            {/* Main Feature Card with Telemetry Background Image */}
+            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="md:col-span-2 md:row-span-2 bg-gradient-to-br from-[#0b0f17] to-blue-950/20 border border-slate-800 hover:border-blue-500/50 rounded-3xl p-8 md:p-10 relative overflow-hidden flex flex-col justify-end shadow-2xl group">
+              <div className="absolute inset-0 opacity-25 group-hover:opacity-40 transition-opacity duration-500 pointer-events-none">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Fleet Telemetry Dashboard" 
+                  className="w-full h-full object-cover"
+                />
               </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f17] via-[#0b0f17]/70 to-transparent z-0"></div>
+
               <div className="relative z-10">
-                <span className="text-xs font-mono text-blue-400 uppercase">Primary Offering</span>
-                <h4 className="text-2xl md:text-3xl font-bold text-white mt-1 mb-2">Fleet Management Solutions</h4>
-                <p className="text-slate-400 text-sm max-w-md">Command entire enterprise operations with real-time tracking, intelligent routing, and predictive analytics designed for scale.</p>
+                <span className="text-[10px] font-mono text-white bg-blue-600 px-3 py-1 rounded-full uppercase tracking-wider mb-4 inline-block shadow-[0_0_10px_rgba(37,99,235,0.4)]">Primary Infrastructure</span>
+                <h4 className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight">Fleet Management Solutions</h4>
+                <p className="text-slate-300 text-base max-w-lg leading-relaxed">Command entire enterprise operations with real-time tracking, intelligent routing, and predictive analytics designed for massive commercial scale.</p>
               </div>
             </motion.div>
 
-            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 rounded-3xl p-6 flex flex-col justify-between shadow-sm">
-              <span className="text-xs font-mono text-[#FF3366] uppercase">Active Safety</span>
+            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-600 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+              <span className="text-[10px] font-mono text-[#FF3366] uppercase tracking-widest">Active Safety</span>
               <div>
-                <h4 className="text-lg font-bold text-white mb-1">AI Video Telematics</h4>
-                <p className="text-slate-400 text-xs">Next-gen driver behavior monitoring and proactive ADAS collision avoidance.</p>
+                <h4 className="text-xl font-bold text-white mb-2">AI Video Telematics</h4>
+                <p className="text-slate-400 text-sm leading-relaxed">Next-gen driver behavior monitoring and proactive ADAS collision avoidance.</p>
               </div>
             </motion.div>
 
-            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 rounded-3xl p-6 flex flex-col justify-between shadow-sm">
-              <span className="text-xs font-mono text-blue-400 uppercase">Infrastructure</span>
+            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-600 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+              <span className="text-[10px] font-mono text-blue-400 uppercase tracking-widest">Infrastructure</span>
               <div>
-                <h4 className="text-lg font-bold text-white mb-1">IoT Connectivity & Cloud</h4>
-                <p className="text-slate-400 text-xs">Seamless physical-to-cloud sensor synchronization ensuring zero data loss.</p>
+                <h4 className="text-xl font-bold text-white mb-2">IoT Connectivity & Cloud</h4>
+                <p className="text-slate-400 text-sm leading-relaxed">Seamless physical-to-cloud sensor synchronization ensuring zero data loss.</p>
               </div>
             </motion.div>
 
-            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="md:col-span-2 bg-[#0b0f17] border border-slate-800 hover:border-slate-700 rounded-3xl p-6 flex flex-col justify-center shadow-sm">
-              <span className="text-xs font-mono text-slate-500 uppercase mb-1">Security & Support</span>
-              <h4 className="text-lg font-bold text-white mb-1">Vehicle Security, Professional Installation & Maintenance</h4>
-              <p className="text-slate-400 text-xs max-w-lg">Military-grade asset protection, automated remote immobilization, end-to-end technical deployment and preventive maintenance.</p>
+            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="md:col-span-2 bg-[#0b0f17] border border-slate-800 hover:border-slate-600 rounded-3xl p-8 flex flex-col justify-center shadow-xl">
+              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2 block">Security & Support</span>
+              <h4 className="text-xl md:text-2xl font-bold text-white mb-2">Vehicle Security, Installation & Maintenance</h4>
+              <p className="text-slate-400 text-sm max-w-2xl leading-relaxed">Military-grade asset protection, automated remote immobilization, end-to-end technical deployment and preventive maintenance.</p>
             </motion.div>
 
-            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 rounded-3xl p-6 flex flex-col justify-between shadow-sm">
-              <span className="text-xs font-mono text-slate-500 uppercase">Integration</span>
+            <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-600 rounded-3xl p-8 flex flex-col justify-between shadow-xl">
+              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Integration</span>
               <div>
-                <h4 className="text-lg font-bold text-white mb-1">System Integration</h4>
-                <p className="text-slate-400 text-xs">Custom API routing and enterprise software architecture synchronization.</p>
+                <h4 className="text-xl font-bold text-white mb-2">System Integration</h4>
+                <p className="text-slate-400 text-sm leading-relaxed">Custom API routing and enterprise software architecture synchronization.</p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Industries We Serve */}
-      <section id="industries" className="py-24 px-6 border-b border-slate-800/80">
-        <div className="max-w-6xl mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-12">
-            <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">Sectors</h2>
-            <h3 className="text-3xl font-extrabold text-white">Industries We Serve</h3>
-          </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
-            {['Logistics', 'Transportation', 'Construction', 'Government', 'Healthcare', 'Marine', 'Utilities', 'Security', 'Commercial Fleets', 'Smart Mobility'].map((ind, i) => (
-              <motion.div key={i} whileHover={{ y: -3, borderColor: 'rgba(59, 130, 246, 0.5)' }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 py-4 px-3 rounded-xl text-slate-300 font-semibold text-sm cursor-default shadow-sm">
-                {ind}
-              </motion.div>
+      {/* Industries Marquee */}
+      <section id="industries" className="py-20 border-b border-slate-800/80 overflow-hidden bg-[#06090f]">
+        <div className="max-w-7xl mx-auto px-6 mb-10">
+          <span className="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1">Operational Sectors</span>
+          <h2 className="text-3xl font-extrabold text-white">Industries We Serve</h2>
+        </div>
+        
+        <div className="relative flex overflow-x-hidden group">
+          <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#06090f] to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#06090f] to-transparent z-10 pointer-events-none"></div>
+          
+          <motion.div 
+            className="flex whitespace-nowrap gap-6 px-3"
+            animate={{ x: [0, -1920] }} 
+            transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+          >
+            {[...industries, ...industries, ...industries].map((ind, i) => (
+              <div key={i} className="bg-[#0b0f17] border border-slate-800 py-5 px-8 rounded-2xl text-slate-300 font-bold text-base md:text-lg flex-shrink-0 flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-blue-500/50"></span> {ind}
+              </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Technology Expertise */}
       <section id="expertise" className="py-24 px-6 bg-[#04060a] border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-12">
-            <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">Capabilities</h2>
-            <h3 className="text-3xl font-extrabold text-white">Technology Expertise</h3>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-14">
+            <span className="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1">Technical Stack</span>
+            <h2 className="text-3xl font-extrabold text-white">Platform Capabilities</h2>
           </motion.div>
-          <div className="flex flex-wrap gap-3">
-            {['GPS Telematics', 'Artificial Intelligence', 'Video Analytics', 'ADAS', 'Driver Monitoring', 'IoT', 'Cloud Platform', 'Fleet Analytics', 'API Integration', 'Connected Vehicles'].map((tech, i) => (
-              <motion.span key={i} whileHover={{ scale: 1.03, backgroundColor: 'rgba(30, 41, 59, 1)' }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 px-4 py-2.5 rounded-lg text-slate-300 font-mono text-xs uppercase tracking-wider cursor-default shadow-sm">
-                {tech}
-              </motion.span>
-            ))}
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-[#0b0f17] border border-slate-800 p-8 rounded-3xl">
+              <h3 className="text-white font-bold mb-6 flex items-center gap-3"><svg className="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" /></svg> Intelligence & Analytics</h3>
+              <div className="flex flex-wrap gap-2">
+                {['Artificial Intelligence', 'Video Analytics', 'Fleet Analytics', 'Driver Monitoring'].map(tech => (
+                  <span key={tech} className="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded text-slate-300 font-mono text-[11px] uppercase tracking-wider">{tech}</span>
+                ))}
+              </div>
+            </div>
+            
+            <div className="bg-[#0b0f17] border border-slate-800 p-8 rounded-3xl">
+              <h3 className="text-white font-bold mb-6 flex items-center gap-3"><svg className="w-5 h-5 text-[#FF3366]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg> Hardware & Safety</h3>
+              <div className="flex flex-wrap gap-2">
+                {['GPS Telematics', 'ADAS', 'IoT Sensors', 'Connected Vehicles'].map(tech => (
+                  <span key={tech} className="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded text-slate-300 font-mono text-[11px] uppercase tracking-wider">{tech}</span>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-[#0b0f17] border border-slate-800 p-8 rounded-3xl">
+              <h3 className="text-white font-bold mb-6 flex items-center gap-3"><svg className="w-5 h-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg> Infrastructure</h3>
+              <div className="flex flex-wrap gap-2">
+                {['Cloud Platform', 'API Integration', 'Secure Routing', 'Data Redundancy'].map(tech => (
+                  <span key={tech} className="bg-slate-900 border border-slate-700 px-3 py-1.5 rounded text-slate-300 font-mono text-[11px] uppercase tracking-wider">{tech}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Featured Projects */}
-      <section id="projects" className="py-24 px-6 border-b border-slate-800/80">
+      <section id="projects" className="py-28 px-6 border-b border-slate-800/80 bg-[#06090f]">
         <div className="max-w-6xl mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-12">
-            <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">Track Record</h2>
-            <h3 className="text-3xl font-extrabold text-white">Featured Project Deployments</h3>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-14">
+            <span className="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1">Track Record</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white">Featured Project Deployments</h2>
           </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-            <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 p-6 rounded-2xl shadow-sm">
-              <h4 className="font-bold text-white mb-2">Fleet Digitalisation</h4>
-              <p className="text-slate-400 text-xs">Full-scale telematics transformation for regional transport networks.</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.4 }} className="group relative bg-[#0b0f17] border border-slate-800 rounded-3xl overflow-hidden h-[400px] flex flex-col justify-end cursor-pointer shadow-2xl">
+              <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700">
+                <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=1000&auto=format&fit=crop" alt="Fleet Digitalisation" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#06090f] via-[#06090f]/80 to-transparent z-10"></div>
+              <div className="relative z-20 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="flex gap-2 mb-3">
+                  <span className="text-[9px] font-mono uppercase bg-blue-600 px-2.5 py-1 rounded text-white shadow">Telematics</span>
+                  <span className="text-[9px] font-mono uppercase bg-slate-800 px-2.5 py-1 rounded text-slate-300">Logistics</span>
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-2">Fleet Digitalisation</h4>
+                <p className="text-slate-300 text-sm leading-relaxed">Full-scale telematics transformation for tier-1 regional transport networks.</p>
+              </div>
             </motion.div>
-            <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 p-6 rounded-2xl shadow-sm">
-              <h4 className="font-bold text-white mb-2">AI Driver Safety Deployment</h4>
-              <p className="text-slate-400 text-xs">Active ADAS and driver behavior monitoring implementation.</p>
+
+            <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.4 }} className="group relative bg-[#0b0f17] border border-slate-800 rounded-3xl overflow-hidden h-[400px] flex flex-col justify-end cursor-pointer shadow-2xl">
+              <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop" alt="AI Driver Safety" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#06090f] via-[#06090f]/80 to-transparent z-10"></div>
+              <div className="relative z-20 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="flex gap-2 mb-3">
+                  <span className="text-[9px] font-mono uppercase bg-[#FF3366] px-2.5 py-1 rounded text-white shadow">ADAS AI</span>
+                  <span className="text-[9px] font-mono uppercase bg-slate-800 px-2.5 py-1 rounded text-slate-300">Commercial</span>
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-2">AI Driver Safety</h4>
+                <p className="text-slate-300 text-sm leading-relaxed">Active collision avoidance and behavioral monitoring deployment for high-risk routes.</p>
+              </div>
             </motion.div>
-            <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="bg-[#0b0f17] border border-slate-800 hover:border-slate-700 p-6 rounded-2xl shadow-sm">
-              <h4 className="font-bold text-white mb-2">Government Fleet Solutions</h4>
-              <p className="text-slate-400 text-xs">Secure tracking and asset governance for municipal infrastructure.</p>
+
+            <motion.div whileHover={{ y: -8 }} transition={{ duration: 0.4 }} className="group relative bg-[#0b0f17] border border-slate-800 rounded-3xl overflow-hidden h-[400px] flex flex-col justify-end cursor-pointer shadow-2xl">
+              <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700">
+                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1000&auto=format&fit=crop" alt="Municipal Solutions" className="w-full h-full object-cover" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#06090f] via-[#06090f]/80 to-transparent z-10"></div>
+              <div className="relative z-20 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <div className="flex gap-2 mb-3">
+                  <span className="text-[9px] font-mono uppercase bg-blue-600 px-2.5 py-1 rounded text-white shadow">GovTech</span>
+                  <span className="text-[9px] font-mono uppercase bg-slate-800 px-2.5 py-1 rounded text-slate-300">Security</span>
+                </div>
+                <h4 className="text-2xl font-bold text-white mb-2">Municipal Solutions</h4>
+                <p className="text-slate-300 text-sm leading-relaxed">Secure tracking, asset governance, and compliance routing for municipal infrastructure.</p>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Contact Us & Enquiry Form */}
+      {/* Contact Section */}
       <section id="contact" className="py-24 px-6 bg-[#04060a] relative">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-xs font-bold text-blue-400 uppercase tracking-widest mb-1">Direct Channel</h2>
-            <h3 className="text-3xl font-extrabold text-white mb-6">Contact Our Team</h3>
+            <span className="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1">Direct Channel</span>
+            <h2 className="text-3xl font-extrabold text-white mb-6">Contact Our Team</h2>
             <p className="text-slate-400 text-sm mb-8">Ready to transform your fleet or explore enterprise integration? Connect with our systems architecture team.</p>
             
-            <div className="space-y-4 text-sm text-slate-300 bg-[#0b0f17] border border-slate-800 p-6 rounded-2xl">
+            <div className="space-y-4 text-sm text-slate-300 bg-[#0b0f17] border border-slate-800 p-6 rounded-3xl shadow-xl">
               <div className="flex items-start gap-4 border-b border-slate-800 pb-4">
                 <div className="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 mt-0.5">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                 </div>
                 <div>
                   <span className="text-xs text-slate-500 uppercase font-mono block mb-0.5">Corporate Address</span>
@@ -318,9 +434,7 @@ const App = () => {
 
               <div className="flex items-start gap-4 border-b border-slate-800 pb-4">
                 <div className="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 mt-0.5">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                 </div>
                 <div>
                   <span className="text-xs text-slate-500 uppercase font-mono block mb-0.5">Telephone</span>
@@ -330,9 +444,7 @@ const App = () => {
 
               <div className="flex items-start gap-4 border-b border-slate-800 pb-4">
                 <div className="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 mt-0.5">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
                 </div>
                 <div>
                   <span className="text-xs text-slate-500 uppercase font-mono block mb-0.5">Corporate Email</span>
@@ -342,9 +454,7 @@ const App = () => {
 
               <div className="flex items-start gap-4">
                 <div className="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400 mt-0.5">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
                 </div>
                 <div>
                   <span className="text-xs text-slate-500 uppercase font-mono block mb-0.5">Instant Messaging</span>
@@ -388,11 +498,11 @@ const App = () => {
       </section>
       
       {/* Footer */}
-      <footer className="bg-[#06090f] py-8 text-center border-t border-slate-800 text-slate-500 text-xs">
-        <p>© 2026 SQ Image (S) Pte Ltd. All Rights Reserved. Intelligent Fleet & Mobility Solutions.</p>
+      <footer className="bg-[#06090f] py-8 text-center border-t border-slate-800 text-slate-500 text-xs font-mono">
+        <p>© 2026 SQ IMAGE (S) PTE LTD. ALL RIGHTS RESERVED. // PHNOM PENH, CAMBODIA</p>
       </footer>
     </div>
   );
 };
 
-export default App;
+export default App; 
