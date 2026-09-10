@@ -113,8 +113,16 @@ const App = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section with Restored Background Photo */}
       <header className="relative py-28 md:py-36 px-6 flex items-center justify-center min-h-[85vh] border-b border-slate-800/80 overflow-hidden bg-[#06090f]">
+        <div className="absolute inset-0 opacity-15 mix-blend-luminosity pointer-events-none scale-105">
+          <img 
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" 
+            alt="Connected Mobility Background" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06090f] via-[#06090f]/90 to-transparent"></div>
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
 
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="relative max-w-4xl mx-auto text-center z-10">
@@ -231,7 +239,7 @@ const App = () => {
         </div>
       </section>
 
-      {/* Enterprise Solutions Section with Restored Background Image */}
+      {/* Enterprise Solutions Section with Telemetry Background Image */}
       <section id="solutions" className="py-28 px-6 relative bg-[#04060a] border-b border-slate-800/80">
         <div className="max-w-6xl mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="mb-14 text-center md:text-left">
@@ -505,4 +513,4 @@ const App = () => {
   );
 };
 
-export default App; 
+export default App;
