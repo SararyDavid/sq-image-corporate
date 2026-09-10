@@ -160,10 +160,10 @@ const App = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#06090f] via-[#06090f]/90 to-transparent"></div>
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none"></div>
 
-        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="relative max-w-4xl mx-auto text-center z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold tracking-wider text-blue-400 mb-6 uppercase">
-            <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse"></span>
-            Technology Integration Partner • Singapore & Southeast Asia
+        <motion.div initial="hidden" animate="visible" variants={fadeUp} className="relative max-w-4xl mx-auto text-center z-10 px-4">
+          <div className="inline-flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-[10px] sm:text-xs font-semibold tracking-wider text-blue-400 mb-6 uppercase text-center max-w-xs sm:max-w-none mx-auto">
+            <span className="h-1.5 w-1.5 rounded-full bg-blue-500 animate-pulse flex-shrink-0"></span>
+            <span>Technology Integration Partner • Singapore & Southeast Asia</span>
           </div>
           <h1 className="text-4xl md:text-7xl font-extrabold mb-6 tracking-tight leading-[1.05] text-white">
             Driving the Future of <br/>
